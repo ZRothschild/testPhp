@@ -10,6 +10,9 @@ namespace Module\Decorator;
 
 
 class MakeUp extends Finery{
+
+    protected static $DAO_NAME = 'test';
+
     public function display(){
         echo "化妆".'<br>';
         parent::display();

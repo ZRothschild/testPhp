@@ -16,11 +16,18 @@ use Module\DecoratorInterface;
  */
 class Finery implements DecoratorInterface
 {
+    protected static $DAO_NAME;
+
     private $component;
     public function __construct(DecoratorInterface $component){
         $this->component = $component;
     }
     public function display(){
         $this->component->display();
+    }
+
+    public function getStatic()
+    {
+        echo  "<br>".static::$DAO_NAME."111<br>";
     }
 }
