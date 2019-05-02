@@ -12,7 +12,8 @@ class Loader
 
     public static function loadLoader($class)
     {
-        require dirname(__DIR__).'/' .$class.'.php';
+        //linux  使用的是  /
+        require dirname(__DIR__).'/' .str_replace('\\','/',$class).'.php';
     }
 
     public static function getLoader()
