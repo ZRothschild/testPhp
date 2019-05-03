@@ -134,16 +134,21 @@ class Pipeline implements PipelineInterface
     protected function carry()
     {
         return function ($stack, $pipe) {
+//            $pipe(1,function ($poster) {
+//            echo "####received: $poster<br>";
+//            return 3;
+//        });
             return function ($passable) use ($stack, $pipe) {
                 if (is_callable($pipe)) {
                     /**
                      * 如果管道是Closure的一个实例，我们将直接调用它
                      * 否则我们将从容器中解析管道并调用它
-                     * 适当的方法和参数，返回结果。
+                     * 适当的方法和参数，返回结果。 函数调用函数
                      *  4 => $pipe($aa,$stack)  3 $pipe($aa,$pipe($aa,$stack))
                      *  2 $pipe($aa,$pipe($aa,$pipe($aa,$stack)))
                      *  1 $pipe($aa,$pipe($aa,$pipe($aa,$pipe($aa,$stack))) )
                      */
+//                    echo "<br>####<br>";
                     return $pipe($passable, $stack);
                 } elseif (!is_object($pipe)) {
                     [$name, $parameters] = $this->parsePipeString($pipe);

@@ -43,14 +43,15 @@ $pipes = [$pipe1, $pipe2, $pipe3, $pipe4];
 function dispatcher($poster, $pipes)
 {
     echo "result:" .(new Pipeline)->send($poster)->through($pipes)->then(function ($poster) {
-            echo "received: $poster\n";
+            echo "received: $poster<br>";
             return 3;
-        }) . "\n";
+        }) . "<br>";
 }
-echo "==> action 1:<br>";
+echo "==> action start:<br>";
 dispatcher(5, $pipes);
-echo "==> action 2:<br>";
-dispatcher(7, $pipes);
+echo "<br>==> action end:<br>";
+//echo "<br>==> action 2:<br>";
+//dispatcher(7, $pipes);
 
 //******************  类  **********************
 
@@ -61,7 +62,59 @@ $school  = new School($getUp);
 
 $pipeStd = [$pipe1, $pipe2, $pipe3, $pipe4];
 
-(new Pipeline(new Container()))->send($poster)->through($pipes)->then(function ($poster) {
-    echo "received: $poster\n";
+//(new Pipeline(new Container()))->send($poster)->through($pipes)->then(function ($poster) {
+//    echo "received: $poster\n";
+//    return 3;
+//});
+
+
+
+//function test ($a,$b){
+//    return function ($c) use ($a,$b) {
+//        return $c($a,$b);
+//    };
+//}
+//
+//$test = test(1,3);
+//$test(function ($a,$b){
+//    echo $a+$b;
+//});
+//
+
+
+function myfunction($v1,$v2)
+{
+    return function ($num) use ($v1,$v2){
+        echo $num."&&&&&&&&<br><br>";
+
+        $v2($num,$v1);
+        echo $num."???????<br><br>";
+        return $v2($num,$v1);
+    };
+}
+
+$m3 = function($num, Closure $next){
+    $num += 4;
+    echo $num."@3<br>";
+    return $next($num);
+};
+
+$m2 = function($num, Closure $next){
+    $num += 3;
+    echo $num."@2<br>";
+    return $next($num);
+};
+
+$m1 = function($num, Closure $next){
+    $num += 1;
+    echo $num."@1<br>";
+    return $next($num);
+};
+
+
+$a=array($m3,$m2,$m1);
+$cc = array_reduce($a,"myfunction",function ($num){
+    echo $num."<br>";
     return 3;
 });
+echo $cc(1);
