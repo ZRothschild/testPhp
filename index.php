@@ -55,3 +55,6 @@ $superman_1 = $container->make('superman', ['xpower']);
 $superman_2 = $container->make('superman', ['ultrabomb']);
 $superman_3 = $container->make('superman', ['xpower']);
 // ...随意添加
+
+
+new SplDoublyLinkedList();
