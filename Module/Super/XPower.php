@@ -8,7 +8,7 @@
 
 namespace Module\Super;
 
-use Module\SuperInterface;
+use InterfaceRepository\SuperInterface;
 
 /**
  * X-超能量

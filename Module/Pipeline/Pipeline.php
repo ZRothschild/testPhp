@@ -11,7 +11,7 @@ namespace Module\Pipeline;
 use Closure;
 use RuntimeException;
 use Container\Container;
-use Module\PipelineInterface;
+use InterfaceRepository\PipelineInterface;
 
 class Pipeline implements PipelineInterface
 {

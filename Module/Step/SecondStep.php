@@ -8,7 +8,7 @@
 
 namespace Module\Step;
 
-use Module\StepInterface;
+use InterfaceRepository\StepInterface;
 use Closure;
 
 class SecondStep implements StepInterface{

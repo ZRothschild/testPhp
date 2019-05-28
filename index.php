@@ -17,6 +17,7 @@ use Container\Container;
 use Module\Super\XPower;
 use Module\Super\UltraBomb;
 use Controller\SupermanController;
+use Db\User;
 
 // ******************  依赖注入  **********************
 $reUser = new RepositoryUser();
@@ -58,3 +59,7 @@ $superman_3 = $container->make('superman', ['xpower']);
 
 
 new SplDoublyLinkedList();
+
+
+$User = new User();
+var_dump($User->getDb());

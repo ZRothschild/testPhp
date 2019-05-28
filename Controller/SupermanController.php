@@ -8,7 +8,7 @@
 
 namespace Controller;
 
-use Module\SuperInterface;
+use InterfaceRepository\SuperInterface;
 
 class SupermanController
 {

@@ -6,7 +6,7 @@
  * Time: 14:38
  */
 
-namespace Module;
+namespace InterfaceRepository;
 
 interface SuperInterface
 {

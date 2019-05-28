@@ -8,7 +8,7 @@
 
 namespace Module\Decorator;
 
-use Module\DecoratorInterface;
+use InterfaceRepository\DecoratorInterface;
 
 /**
  * Class Finery  服饰

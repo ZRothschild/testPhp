@@ -6,7 +6,7 @@
  * Time: 13:45
  */
 
-namespace Module;
+namespace InterfaceRepository;
 
 
 interface DecoratorInterface

@@ -1,74 +1,52 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: 87390
- * Date: 2019/3/29
- * Time: 22:56
- */
 
-/**
- *  $user = new RepositoryUser(200);
- *
- * //这操作构造函数就没有了
- * $test = serialize($user); // 调用user::serialize
- *
- * $newobj = unserialize($test);// 调用user::unserialize
- *
- * echo "<br>";
- *
- * echo $newobj->show("你大爷");// 调用userOne::show
- * // 执行结束，调用析构函数，先执行newobj对象的析构函数在执行user对象的析构函数
- *
- * echo "<br>";
- */
 
-namespace Repository;
+namespace Common;
+
 
 use ArrayAccess;
 use Countable;
 use Iterator;
 use Serializable;
 
-class RepositoryUser implements Iterator,Countable,ArrayAccess,Serializable
+class BaseDb implements Iterator,Countable,ArrayAccess,Serializable
 {
-    public $name;
-    public $age;
-    public $sex;
-    protected $height;
-    private $_array = ['a','b','c'];
-    private $_key = 0;
-    public $count;
     public $data;
 
-    public function __construct($count = 0)
+    protected static $dbName;
+    protected static $tableName;
+
+    private $_array;
+    private $_key;
+
+    public function __construct($data = [])
     {
-        $this->count = $count;
+        if (!empty($data)) $this->data = $data;
     }
 
-    public function show($name)
+    public function getDb()
     {
-        var_dump($name);
+        return static::$dbName;
     }
 
-    public function setName($name)
+    /**
+     * 没有设置就是 文件名称
+     * @return string
+     */
+    public function getTable()
     {
-        $this->name = $name;
+        if (isset(static::$tableName)) return static::$tableName;
+        return static::class;
     }
 
     /**
      * 当直接使用count 函数 操作 对象时触发此方法
-     * eg:
-     *      $user = new RepositoryUser($count)
-     *      echo count($user);
-     *      echo "<br>";
      * @return int
      */
     public function count()
     {
-        // TODO: Implement count() method.
-        return $this->count;
+        return count($this->_array);
     }
-
 
     /**
      * unserialize  serialize 存储对象到解析依旧可用
@@ -104,14 +82,14 @@ class RepositoryUser implements Iterator,Countable,ArrayAccess,Serializable
      */
     public function offsetGet($offset)
     {
-        // TODO: Implement offsetGet() method.
-        return $this->{$offset};
+        return $this->_array[$offset];
     }
 
 
     public function offsetSet($offset,$value)
     {
-        return $this->{$offset} = $value;
+        $this->{$offset} = $value;
+        return $this->_array[$offset] = $value;
     }
 
     /**
@@ -124,16 +102,13 @@ class RepositoryUser implements Iterator,Countable,ArrayAccess,Serializable
     public function __set($name, $value)
     {
         $this->{$name} = $value;
-        // TODO: Implement __set() method.
     }
 
     public function __get($name)
     {
-        $this->{$name};
-        // TODO: Implement __set() method.
+        return isset($this->{$name}) ? $this->{$name}: new \Exception();
+
     }
-
-
 
     /**
      * @param mixed $offset
@@ -145,13 +120,11 @@ class RepositoryUser implements Iterator,Countable,ArrayAccess,Serializable
         return true;
     }
 
-
     /**
      * 将索引游标指向初始位置
      */
     public function rewind()
     {
-        // TODO: Implement rewind() method.
         $this->_key = 0;
     }
 
@@ -161,7 +134,6 @@ class RepositoryUser implements Iterator,Countable,ArrayAccess,Serializable
      */
     public function valid()
     {
-        // TODO: Implement valid() method.
         return isset($this->_array[$this->_key]);
     }
 
@@ -170,7 +142,6 @@ class RepositoryUser implements Iterator,Countable,ArrayAccess,Serializable
      */
     public function next()
     {
-        // TODO: Implement next() method.
         $this->_key++;
     }
 
@@ -180,21 +151,17 @@ class RepositoryUser implements Iterator,Countable,ArrayAccess,Serializable
      */
     public function current()
     {
-        // TODO: Implement current() method.
         return $this->_array[$this->_key];
     }
 
     public function key()
     {
-        // TODO: Implement key() method.
         return $this->_key;
     }
 
 
     public function __destruct()
     {
-        echo $this->count."测试有之<br>";
-        // TODO: Implement __destruct() method.
         unset($this->data);
     }
 }

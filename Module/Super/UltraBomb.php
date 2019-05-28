@@ -8,7 +8,7 @@
 
 namespace Module\Super;
 
-use Module\SuperInterface;
+use InterfaceRepository\SuperInterface;
 /**
  * 终极炸弹 （就这么俗）
  */

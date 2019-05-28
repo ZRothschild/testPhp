@@ -8,7 +8,7 @@
 
 namespace Module\Decorator;
 
-use Module\DecoratorInterface;
+use InterfaceRepository\DecoratorInterface;
 
 class Student implements DecoratorInterface
 {

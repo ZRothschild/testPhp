@@ -9,7 +9,7 @@
 namespace Module\Step;
 
 use Closure;
-use Module\StepInterface;
+use InterfaceRepository\StepInterface;
 
 class FirstStep implements StepInterface{
     public static function go(Closure $next){

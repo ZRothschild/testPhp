@@ -6,7 +6,7 @@
  * Time: 13:35
  */
 
-namespace Module;
+namespace InterfaceRepository;
 
 use Closure;
 
