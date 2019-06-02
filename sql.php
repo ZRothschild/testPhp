@@ -1,12 +1,15 @@
 <?php
 
 // ******************  自动加载  **********************
-require __DIR__.'/load/Loader.php';
-Loader::getLoader();
+//require __DIR__.'/load/Loader.php';
+//Loader::getLoader();
 
-use \Repository\RepositoryUser;
 
-$user = new RepositoryUser(200);
+require __DIR__.'/vendor/autoload.php';
+
+use App\Repository\UserRepository;
+
+$user = new UserRepository(200);
 
 $user['php'] = '世界上最好的语言';
 $user['java'] = '垃圾语言';

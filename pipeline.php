@@ -6,16 +6,13 @@
  * Time: 20:38
  */
 
-// ******************  自动加载  **********************
-require __DIR__.'/load/Loader.php';
-Loader::getLoader();
+require __DIR__.'/vendor/autoload.php';
 
-use Module\Pipeline\Pipeline;
-use Container\Container;
-use \Module\Decorator\Student;
-use \Module\Decorator\MakeUp;
-use \Module\Decorator\GetUp;
-use \Module\Decorator\School;
+use App\Module\Pipeline\Pipeline;
+use App\Module\Decorator\Student;
+use App\Module\Decorator\MakeUp;
+use App\Module\Decorator\GetUp;
+use App\Module\Decorator\School;
 
 // ******************  匿名函数  **********************
 $pipe1 = function ($poster, Closure $next) {

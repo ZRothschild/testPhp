@@ -7,20 +7,18 @@
  */
 
 // ******************  自动加载  **********************
-require __DIR__.'/load/Loader.php';
-Loader::getLoader();
+require __DIR__.'/vendor/autoload.php';
 
-use Repository\RepositoryUser;
-use Controller\UsersController;
-use Controller\CartController;
-use Container\Container;
-use Module\Super\XPower;
-use Module\Super\UltraBomb;
-use Controller\SupermanController;
-use Db\User;
+use App\Repository\UserRepository;
+use App\Container\Container;
+use App\Module\Super\XPower;
+use App\Module\Super\UltraBomb;
+use App\Controllers\UsersController;
+use App\Controllers\CartController;
+use App\Controllers\SupermanController;
 
 // ******************  依赖注入  **********************
-$reUser = new RepositoryUser();
+$reUser = new UserRepository();
 $userCon = new UsersController($reUser);
 
 // ******************  匿名函数  **********************
@@ -56,10 +54,3 @@ $superman_1 = $container->make('superman', ['xpower']);
 $superman_2 = $container->make('superman', ['ultrabomb']);
 $superman_3 = $container->make('superman', ['xpower']);
 // ...随意添加
-
-
-new SplDoublyLinkedList();
-
-
-$User = new User();
-var_dump($User->getDb());
